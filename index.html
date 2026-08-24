@@ -9,19 +9,19 @@
 <style>
 /* ── TOKENS ── */
 :root {
-  /* ground */
-  --bg:         #0e0e14;
-  --surf-1:     #161622;
-  --surf-2:     #1d1d2e;
-  --border:     rgba(125,211,252,.1);
-  --border-mid: rgba(125,211,252,.2);
+  /* ground — deep navy, not near-black */
+  --bg:         #0b1e3d;
+  --surf-1:     #102448;
+  --surf-2:     #163059;
+  --border:     rgba(125,211,252,.14);
+  --border-mid: rgba(125,211,252,.28);
   /* type */
-  --ink:        #eeeef5;
-  --ink-muted:  #8a8ab0;
-  --ink-faint:  #45455a;
+  --ink:        #e8f0fc;
+  --ink-muted:  #90aad0;
+  --ink-faint:  #4a6080;
   /* accent — arc plasma blue */
   --arc:        #7dd3fc;
-  --arc-glow:   rgba(125,211,252,.18);
+  --arc-glow:   rgba(125,211,252,.15);
   --arc-deep:   #38bdf8;
   /* hot CTA — live-wire amber */
   --hot:        #f59e0b;
@@ -88,7 +88,7 @@ a{text-decoration:none;color:inherit}
   position:fixed;inset-block-start:0;inset-inline:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
   padding:16px clamp(20px,4vw,48px);
-  background:rgba(14,14,20,.82);
+  background:rgba(11,30,61,.88);
   backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
 }
@@ -143,7 +143,7 @@ a{text-decoration:none;color:inherit}
   min-height:100svh;
   display:flex;align-items:center;
   overflow:hidden;
-  background:#0e0e14;
+  background:#0b1e3d;
 }
 #arc-canvas{
   position:absolute;inset:0;width:100%;height:100%;
@@ -878,7 +878,7 @@ footer{
 
   /* ── Lightning bolt ── */
   class Bolt {
-    constructor(){ this.born=false; this.cooldown=Math.random()*80+20; }
+    constructor(){ this.born=false; this.cooldown=Math.random()*400+300; }
     spawn(){
       /* start from top or a random edge, travel down/across */
       const edge = Math.random();
@@ -906,7 +906,7 @@ footer{
         const bey = p.y+Math.random()*80+20;
         this.branches.push(this.jagged(p.x,p.y,bex,bey,Math.floor(Math.random()*3)+2));
       }
-      this.life = Math.floor(Math.random()*18)+8;
+      this.life = Math.floor(Math.random()*60)+50;
       this.age  = 0;
       this.peak = Math.floor(this.life*.25);
       this.born = true;
@@ -929,7 +929,7 @@ footer{
         return;
       }
       this.age++;
-      if(this.age>this.life){ this.born=false; this.cooldown=Math.random()*100+40; }
+      if(this.age>this.life){ this.born=false; this.cooldown=Math.random()*500+350; }
     }
     drawPath(pts, alpha, width, blur){
       ctx.beginPath();
@@ -1005,8 +1005,8 @@ footer{
   /* ── Background gradient ── */
   function drawBg(){
     const g=ctx.createRadialGradient(W*.5,H*.3,0,W*.5,H*.3,W*.7);
-    g.addColorStop(0,'rgba(14,30,60,.6)');
-    g.addColorStop(1,'rgba(14,14,20,0)');
+    g.addColorStop(0,'rgba(20,60,120,.5)');
+    g.addColorStop(1,'rgba(11,30,61,0)');
     ctx.fillStyle=g;
     ctx.fillRect(0,0,W,H);
   }
